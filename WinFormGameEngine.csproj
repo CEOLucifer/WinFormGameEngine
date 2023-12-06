@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Resources\Audio\launch_0.wav" />
+    <None Remove="Assets\Resources\Audio\launch_1.wav" />
+    <None Remove="Assets\Resources\Audio\launch_2.wav" />
+    <None Remove="Assets\Resources\Audio\launch_3.wav" />
+    <None Remove="Assets\Resources\Sprites\background.png" />
+    <None Remove="Assets\Resources\Sprites\base.png" />
+    <None Remove="Assets\Resources\Sprites\missile.png" />
+    <None Remove="Assets\Resources\Sprites\missile_1.png" />
+    <None Remove="Assets\Resources\Sprites\missile_2.png" />
+    <None Remove="Assets\Resources\Sprites\panel.jpg" />
+    <None Remove="Assets\Resources\Sprites\plane.png" />
+    <None Remove="Assets\Resources\Sprites\rotater.png" />
+    <None Remove="Assets\Resources\Sprites\sensei.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Resources\Audio\launch_0.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Audio\launch_1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Audio\launch_2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Audio\launch_3.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\base.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\missile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\missile_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\missile_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\panel.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\plane.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\rotater.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\sensei.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
