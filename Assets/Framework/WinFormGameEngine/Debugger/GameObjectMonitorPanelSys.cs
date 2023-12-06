@@ -27,6 +27,8 @@ internal class GameObjectMonitorPanelSys : SingletonBaseSys<GameObjectMonitorPan
 
         GameObject.OnNewGameObject += m_onNewGameObject;
         GameSys.OnGameObjectRemoveFromObjList += m_onGameObjectRemoveFromObjList;
+
+        Fresh();
     }
 
     public void Hide()

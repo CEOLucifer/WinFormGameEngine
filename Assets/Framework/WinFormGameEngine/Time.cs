@@ -16,6 +16,7 @@ namespace Com.WWZ.WinFormGameEngine
         private static DateTime m_oldTime = DateTime.Now;
         private static float m_deltaTime;
         private static float m_scale = 1.0f;
+        private static float m_originDeltaTime;
 
         internal static Timer Timer
         {
@@ -61,5 +62,21 @@ namespace Com.WWZ.WinFormGameEngine
         /// 时间流动倍率
         /// </summary>
         public static float Scale { get => m_scale; set => m_scale = value; }
+
+        /// <summary>
+        /// 当前帧率
+        /// </summary>
+        public static float CurFps
+        {
+            get
+            {
+                return 1.0f / m_originDeltaTime;
+            }
+        }
+
+        /// <summary>
+        /// 不受Scale影响的帧间隔时间
+        /// </summary>
+        public static float OriginDeltaTime { get => m_originDeltaTime; internal set => m_originDeltaTime = value; }
     }
 }

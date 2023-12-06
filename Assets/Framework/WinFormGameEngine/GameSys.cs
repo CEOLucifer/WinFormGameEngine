@@ -157,7 +157,11 @@ namespace Com.WWZ.WinFormGameEngine
             Update();
 
             // 更新DeltaTime
-            Time.DeltaTime = (DateTime.Now - Time.OldTime).Milliseconds / 1000.0f * Time.Scale;
+            float delta = (DateTime.Now - Time.OldTime).Milliseconds / 1000.0f;
+
+            Time.DeltaTime = delta * Time.Scale;
+
+            Time.OriginDeltaTime = delta;
 
             // 记录旧时间
             Time.OldTime = DateTime.Now;

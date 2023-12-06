@@ -14,8 +14,9 @@ public class GameIniter : BaseComponent
 {
     public override void Awake()
     {
-        //DebuggerSys.Instance.Enter();
-        Time.FPS = 1000;
+        DebuggerSys.Instance.IsShowCurFps = true;
+        DebuggerSys.Instance.Enter();
+        Time.FPS = 120;
         GameManager.Instance.EnterInit();
     }
 }
