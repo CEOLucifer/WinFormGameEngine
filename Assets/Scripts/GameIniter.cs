@@ -15,6 +15,7 @@ public class GameIniter : BaseComponent
     public override void Awake()
     {
         //DebuggerSys.Instance.Enter();
-        GameManager.Instance.ShowInitPanel();
+        Time.FPS = 1000;
+        GameManager.Instance.EnterInit();
     }
 }

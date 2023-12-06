@@ -96,14 +96,20 @@ namespace Com.WWZ.WinFormGameEngine
             {
                 // 不能设置为自己
                 if (value == this)
-                    return;
+                {
+                    throw new Exception("Cannot set self Transform parent.");
+                }
+
+                // 从原来parent的子transform列表中移除自己
+                m_parent?.m_childrenList.Remove(this);
 
                 m_parent = value;
 
-                // 设置父Transform的子Transform
-                if (value.m_childrenList.Contains(this))
+                // 如果新parent为null，则返回
+                if (value == null)
                     return;
 
+                // 设置父Transform的子Transform
                 value.m_childrenList.Add(this);
             }
         }

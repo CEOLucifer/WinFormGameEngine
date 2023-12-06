@@ -27,6 +27,7 @@ namespace Com.WWZ.WinFormGameEngine
         private List<BaseComponent> m_nextFrameToRemove = new();
         private bool m_isDestroyed;
         private string m_name = "GameObject";
+        private bool m_dontDestroyOnDestroyAll = false;
 
         internal List<BaseComponent> ComponentList { get => m_componentList; }
 
@@ -54,6 +55,11 @@ namespace Com.WWZ.WinFormGameEngine
         public string Name { get => m_name; set => m_name = value; }
 
         internal List<BaseComponent> NextFrameToRemove { get => m_nextFrameToRemove; set => m_nextFrameToRemove = value; }
+
+        /// <summary>
+        /// 是否在销毁所有对象时，不被销毁
+        /// </summary>
+        public bool DontDestroyOnDestroyAll { get => m_dontDestroyOnDestroyAll; set => m_dontDestroyOnDestroyAll = value; }
 
         public GameObject()
         {
@@ -91,6 +97,13 @@ namespace Com.WWZ.WinFormGameEngine
             }
 
             T newComponent = new T();
+
+            // 如果是Transform，抛出异常
+            if (newComponent is Transform)
+            {
+                throw new Exception("Cannot add a Transform component.");
+            }
+
             newComponent.GameObject = this;
             m_nextFrameToAdd.Add(newComponent);
             newComponent.Awake();

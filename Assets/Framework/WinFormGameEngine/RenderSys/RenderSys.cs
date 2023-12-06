@@ -31,6 +31,7 @@ namespace 炮打飞机.Assets.Framework
 
                 // 创建RenderUpdater游戏对象
                 GameObject obj = new GameObject("RendererUpdater");
+                obj.DontDestroyOnDestroyAll = true;
                 obj.AddComponent<RendererUpdater>();
             };
 

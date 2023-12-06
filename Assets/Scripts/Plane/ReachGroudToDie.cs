@@ -14,8 +14,12 @@ public class ReachGroudToDie : BaseComponent
     {
         if (this.Transform.Position.Y >= GameSys.Instance.Form.Height)
         {
+            // 从GameManager中移除
+            GameManager.Instance.PlaneSet.Remove(this.GetComponent<Plane>());
+
             this.GameObject.Destroy();
             Console.WriteLine("销毁一个敌机对象");
+
         }
     }
 }

@@ -16,5 +16,10 @@ namespace 炮打飞机.Assets.Form
         {
             InitializeComponent();
         }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

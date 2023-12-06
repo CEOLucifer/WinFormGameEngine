@@ -9,4 +9,6 @@ using System.Threading.Tasks;
 public class AlreadyExitException : Exception
 {
     public AlreadyExitException() : base("GameSys has already been in Exit status.") { }
+
+    public AlreadyExitException(string message) : base(message) { }
 }

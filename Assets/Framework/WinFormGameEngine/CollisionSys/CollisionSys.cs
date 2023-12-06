@@ -22,6 +22,7 @@ namespace Com.WWZ.WinFormGameEngine
             {
                 // 创建CollisionUpdater游戏对象
                 GameObject obj = new GameObject("CollisionUpdater");
+                obj.DontDestroyOnDestroyAll = true;
                 obj.AddComponent<CollisionUpdater>();
             };
 

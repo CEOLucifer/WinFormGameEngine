@@ -44,6 +44,7 @@ internal class GameObjectMonitorPanel : BaseComponent, IUIPanel
         lab.Font = new("微软雅黑", 8);
         lab.BackColor = Color.Green;
         lab.Margin = new(3);
+        lab.ForeColor = Color.White;
 
 
         panel.Controls.Add(lab);

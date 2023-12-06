@@ -186,6 +186,32 @@ namespace Com.WWZ.WinFormGameEngine
 
             return null;
         }
+
+        /// <summary>
+        /// 销毁当前所有游戏对象
+        /// </summary>
+        /// <exception cref="AlreadyExitException"></exception>
+        public void DestroyAllGameObject()
+        {
+            if (!m_isUpdating)
+            {
+                throw new AlreadyExitException("GameSys is in Exit status, but attempt to call DestroyAllGameObject method.");
+            }
+
+            // 销毁每一个游戏对象
+            foreach (GameObject each in m_objList)
+            {
+                // 已经标记销毁的，跳过
+                if (each.IsDestroyed)
+                    continue;
+
+                // 标记为跳过的，跳过
+                if (each.DontDestroyOnDestroyAll)
+                    continue;
+
+                each.Destroy();
+            }
+        }
         #endregion
     }
 }

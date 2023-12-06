@@ -81,6 +81,9 @@ public class Missile : BaseComponent
                 });
             });
         }
+
+        // 记录到GameManager
+        GameManager.Instance.Missile = this;
     }
 }
 

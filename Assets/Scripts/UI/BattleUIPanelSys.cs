@@ -1,22 +1,38 @@
 ﻿using Com.WWZ.WinFormGameEngine;
 using Com.WWZ.WinFormGameEngine.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using 炮打飞机.Assets.Form;
 
 /// <summary>
 /// 战斗UI面板系统
 /// </summary>
 public class BattleUIPanelSys : SingletonBaseSys<BattleUIPanelSys>
 {
+    private Action m_onExitBtnClick;
+
+    public BattleUIPanelSys()
+    {
+        m_onExitBtnClick += () =>
+        {
+            // 销毁飞机
+
+
+            // 销毁炮塔
+
+            // 销毁战斗面板
+
+            GameManager.Instance.EnterInit();
+
+
+        };
+    }
+
     public void Show()
     {
         BattleUIPanel panel = UISys.Instance.ShowPanel<BattleUIPanel>();
+
+        panel.C_turretBtnsPanel.Control.exitBtn.Click += (_, _) =>
+        {
+            m_onExitBtnClick?.Invoke();
+        };
     }
 
     public void Hide()
