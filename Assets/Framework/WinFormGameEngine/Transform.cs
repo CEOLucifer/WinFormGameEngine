@@ -49,6 +49,10 @@ namespace Com.WWZ.WinFormGameEngine
                 float delta = value - m_rotation;
                 m_rotation = value;
 
+                // 如果没有子对象，返回
+                if (m_childrenList.Count == 0)
+                    return;
+
                 // 归位矩阵
                 Matrix4x4 mReturn = Mathf.CreateTranslation(new Vector2(-this.m_position.X, -this.m_position.Y));
 
