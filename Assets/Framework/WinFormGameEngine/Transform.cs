@@ -49,7 +49,7 @@ namespace Com.WWZ.WinFormGameEngine
                 float delta = value - m_rotation;
                 m_rotation = value;
 
-                // 如果没有子对象，返回
+                // 如果没有子对象，返回。避免进行矩阵运算
                 if (m_childrenList.Count == 0)
                     return;
 
@@ -63,7 +63,7 @@ namespace Com.WWZ.WinFormGameEngine
                 Matrix4x4 mTranslation = Mathf.CreateTranslation(new Vector2(this.m_position.X, this.m_position.Y));
 
                 // 以上三个矩阵相乘，不需要在下面foreach循环中重复计算
-                Matrix4x4 mrrt = mTranslation * mRotation * mReturn;
+                Matrix4x4 mtrr = mTranslation * mRotation * mReturn;
 
                 // 修改子Transform的Rotation和Postion
                 foreach (Transform each in m_childrenList)
@@ -75,7 +75,7 @@ namespace Com.WWZ.WinFormGameEngine
                     Matrix4x4 mOrigin = Mathf.CreatePointMatrix(each.Position);
 
                     // 矩阵相乘
-                    Matrix4x4 res = mrrt * mOrigin;
+                    Matrix4x4 res = mtrr * mOrigin;
 
                     each.Position = new Vector2(res.M11, res.M21);
                 }

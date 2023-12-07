@@ -10,7 +10,7 @@ namespace Com.WWZ.WinFormGameEngine
     /// 单例类基类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SingletonBaseSys<T> where T : SingletonBaseSys<T>, new()
+    public class BaseSingleton<T> where T : BaseSingleton<T>, new()
     {
         private static T m_instance;
 

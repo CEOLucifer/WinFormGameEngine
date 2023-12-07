@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class InitPanelSys : SingletonBaseSys<InitPanelSys>
+public class InitPanelSys : BaseSingleton<InitPanelSys>
 {
     public void Show()
     {

@@ -12,7 +12,7 @@ namespace 炮打飞机.Assets.Framework
     /// <summary>
     /// 渲染系统。处理游戏窗口所有渲染相关
     /// </summary>
-    internal class RenderSys : SingletonBaseSys<RenderSys>
+    internal class RenderSys : BaseSingleton<RenderSys>
     {
         private List<IRenderer> m_rendererList = new();
 

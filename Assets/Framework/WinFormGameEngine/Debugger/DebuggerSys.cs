@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// 调试系统
 /// </summary>
-public class DebuggerSys : SingletonBaseSys<DebuggerSys>
+public class DebuggerSys : BaseSingleton<DebuggerSys>
 {
     private bool m_isUpdating;
     private bool m_isShowCurFps = false;

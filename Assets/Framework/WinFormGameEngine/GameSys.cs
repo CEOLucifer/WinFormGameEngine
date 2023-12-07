@@ -13,7 +13,7 @@ namespace Com.WWZ.WinFormGameEngine
     /// <summary>
     /// 游戏系统
     /// </summary>
-    public class GameSys : SingletonBaseSys<GameSys>
+    public class GameSys : BaseSingleton<GameSys>
     {
         // 界面：基于Form
         // 帧更新：基于Timer

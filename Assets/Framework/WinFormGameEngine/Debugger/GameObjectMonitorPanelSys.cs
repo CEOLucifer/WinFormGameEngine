@@ -3,7 +3,7 @@
 using Com.WWZ.WinFormGameEngine.UI;
 using System;
 
-internal class GameObjectMonitorPanelSys : SingletonBaseSys<GameObjectMonitorPanelSys>
+internal class GameObjectMonitorPanelSys : BaseSingleton<GameObjectMonitorPanelSys>
 {
     private Action<GameObject> m_onNewGameObject;
     private Action<GameObject> m_onGameObjectRemoveFromObjList;

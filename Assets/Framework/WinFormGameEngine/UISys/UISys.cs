@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// UI系统
 /// </summary>
-public class UISys : SingletonBaseSys<UISys>
+public class UISys : BaseSingleton<UISys>
 {
     private Dictionary<string, GameObject> m_panelDic = new Dictionary<string, GameObject>();
 

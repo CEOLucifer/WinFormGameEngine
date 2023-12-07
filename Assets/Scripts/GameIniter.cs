@@ -1,6 +1,7 @@
 ﻿using Com.WWZ.WinFormGameEngine;
 using Com.WWZ.WinFormGameEngine.UI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,23 +16,24 @@ public class GameIniter : BaseComponent
     public override void Awake()
     {
         DebuggerSys.Instance.IsShowCurFps = true;
+        //DebuggerSys.Instance.IsShowGameObject = true;
         DebuggerSys.Instance.Enter();
         Time.FPS = 120;
 
         GameManager.Instance.EnterInit();
 
-        //GameObject obj = new GameObject("AudioSource");
-        //AudioSource audioSource = obj.AddComponent<AudioSource>();
-        //audioSource.SoundPlayer = Resources.LoadSoundPlayer("Assets/Resources/Audio/launch_0.wav");
-        //audioSource.Play();
 
-        //GameObject obj = new GameObject("AudioSource");
-        //AudioSource audioSource = obj.AddComponent<AudioSource>();
-        //Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
-        //{
-        //    audioSource.SoundPlayer = soundPlayer;
-        //    audioSource.Play();
-        //});
+        GameObject obj = new GameObject("CoroutineTest");
+        CoroutineComp cc = obj.AddComponent<CoroutineComp>();
+        cc.StartCoroutine(FooCor());
+    }
 
+    private IEnumerator FooCor()
+    {
+        Console.WriteLine("哈哈");
+        yield return new WaitForSeconds(3);
+        Console.WriteLine("呵呵");
+        yield return new WaitForSeconds(3);
+        Console.WriteLine("嘿嘿");
     }
 }

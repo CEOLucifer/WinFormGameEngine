@@ -4,7 +4,7 @@ using Com.WWZ.WinFormGameEngine.UI;
 /// <summary>
 /// 战斗UI面板系统
 /// </summary>
-public class BattleUIPanelSys : SingletonBaseSys<BattleUIPanelSys>
+public class BattleUIPanelSys : BaseSingleton<BattleUIPanelSys>
 {
     private Action m_onExitBtnClick;
 

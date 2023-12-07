@@ -9,7 +9,7 @@ namespace Com.WWZ.WinFormGameEngine
     /// <summary>
     /// 处理碰撞逻辑
     /// </summary>
-    public class CollisionSys : SingletonBaseSys<CollisionSys>
+    public class CollisionSys : BaseSingleton<CollisionSys>
     {
         private List<ICollider> m_colliderList = new();
         private List<ICollider> m_nextFrameToAdd = new();

@@ -11,7 +11,7 @@ using 炮打飞机;
 /// <summary>
 /// 游戏管理器
 /// </summary>
-public class GameManager : SingletonBaseSys<GameManager>
+public class GameManager : BaseSingleton<GameManager>
 {
     private HashSet<Plane> m_planeSet = new HashSet<Plane>();
     private Turret m_turret;
