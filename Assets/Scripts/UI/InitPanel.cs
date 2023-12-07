@@ -54,7 +54,7 @@ public class InitPanel : BaseComponent, IUIPanel
         GameObject titleLabObj = new GameObject("TitleLabObj");
         m_titleLab = titleLabObj.AddComponent<UIControl<Label>>();
         m_titleLab.Control.Text = "炮打飞机";
-        m_titleLab.Control.Font = new Font("微软雅黑", 72);
+        m_titleLab.Control.Font = new Font(Resources.LoadFontFamily("Assets/Resources/Font/IPix中文像素字体.ttf"), 72);
         m_titleLab.Control.AutoSize = true;
         m_titleLab.Control.BackColor = Color.Transparent;
         titleLabObj.Transform.Position = new((form.Width - m_titleLab.Control.Width) / 2, m_titleLabEndPosY2);
@@ -64,7 +64,7 @@ public class InitPanel : BaseComponent, IUIPanel
         GameObject startBtnObj = new GameObject("StartBtnObj");
         m_startBtn = startBtnObj.AddComponent<UIControl<Button>>();
         m_startBtn.Control.Text = "开炮！！！";
-        m_startBtn.Control.Font = new Font("微软雅黑", 20);
+        //m_startBtn.Control.Font = new Font("微软雅黑", 20);
         m_startBtn.Control.Size = new(300, 100);
         startBtnObj.Transform.Position = new((form.Width - m_startBtn.Control.Width) / 2, form.Height + m_startLabEndPosY2);
         m_startBtnLerpMove = startBtnObj.AddComponent<LerpMove>();
@@ -74,7 +74,7 @@ public class InitPanel : BaseComponent, IUIPanel
         GameObject exitBtnObj = new GameObject("ExitBtnObj");
         m_exitBtn = exitBtnObj.AddComponent<UIControl<Button>>();
         m_exitBtn.Control.Text = "退出";
-        m_exitBtn.Control.Font = new Font("微软雅黑", 20);
+        //m_exitBtn.Control.Font = new Font("微软雅黑", 20);
         m_exitBtn.Control.Size = new(300, 100);
         exitBtnObj.Transform.Position = new((form.Width - m_exitBtn.Control.Width) / 2, form.Height + m_exitLabEndPosY2);
         m_exitBtnLerpMove = exitBtnObj.AddComponent<LerpMove>();

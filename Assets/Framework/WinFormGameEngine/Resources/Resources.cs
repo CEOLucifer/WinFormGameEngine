@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Drawing.Text;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Com.WWZ.WinFormGameEngine
 {
@@ -17,10 +13,12 @@ namespace Com.WWZ.WinFormGameEngine
         /// </summary>
         private static Dictionary<string, Bitmap> m_bitmapDic = new();
 
+        private static PrivateFontCollection m_pfc = new PrivateFontCollection();
+
         /// <summary>
-        /// 异步加载Bitmap时的锁对象
+        /// 字体族缓存
         /// </summary>
-        private static object m_lock = new();
+        private static Dictionary<string, FontFamily> m_fontFamiltDic = new();
 
         /// <summary>
         /// 同步加载图片资源
@@ -30,10 +28,10 @@ namespace Com.WWZ.WinFormGameEngine
             if (m_bitmapDic.ContainsKey(path))
                 return m_bitmapDic[path];
 
-            Bitmap newBitmap = new(path);
-            m_bitmapDic.Add(path, newBitmap);
+            Bitmap bitmap = new(path);
+            m_bitmapDic.Add(path, bitmap);
 
-            return newBitmap;
+            return bitmap;
         }
 
         /// <summary>
@@ -45,21 +43,22 @@ namespace Com.WWZ.WinFormGameEngine
         {
             Task.Run(() =>
             {
-                Bitmap newBitmap = null;
+                Bitmap bitmap = null;
 
-                lock (m_lock)
+                lock (m_bitmapDic)
                 {
-                    if (m_bitmapDic.ContainsKey(path))
+                    if (!m_bitmapDic.ContainsKey(path))
                     {
-                        callback?.Invoke(m_bitmapDic[path]);
-                        return;
+                        bitmap = new(path);
+                        m_bitmapDic.Add(path, bitmap);
                     }
-
-                    newBitmap = new(path);
-                    m_bitmapDic.Add(path, newBitmap);
+                    else
+                    {
+                        bitmap = m_bitmapDic[path];
+                    }
                 }
 
-                callback?.Invoke(newBitmap);
+                callback?.Invoke(bitmap);
             });
         }
 
@@ -89,6 +88,62 @@ namespace Com.WWZ.WinFormGameEngine
                 sd.Load();
                 callback?.Invoke(sd);
             });
+        }
+
+        /// <summary>
+        /// 同步加载字体族
+        /// </summary>
+        /// <param name="fontPath"></param>
+        public static FontFamily LoadFontFamily(string fontPath)
+        {
+            if (m_fontFamiltDic.ContainsKey(fontPath))
+                return m_fontFamiltDic[fontPath];
+
+            // 从外部文件加载字体文件  
+            m_pfc.AddFontFile(fontPath);
+
+            // 获取字体族
+            FontFamily newFontFamily = m_pfc.Families[m_pfc.Families.Length - 1];
+
+            // 存到缓存
+            m_fontFamiltDic.Add(fontPath, newFontFamily);
+
+            return newFontFamily;
+        }
+
+        /// <summary>
+        /// 异步加载字体族
+        /// </summary>
+        /// <param name="fontPath"></param>
+        /// <param name="callback"></param>
+        public static void LoadFontFamilyAsync(string fontPath, Action<FontFamily> callback)
+        {
+            Task.Run(() =>
+            {
+                FontFamily fontFamily = null;
+
+                lock (m_fontFamiltDic)
+                {
+                    if (!m_fontFamiltDic.ContainsKey(fontPath))
+                    {
+                        // 从外部文件加载字体文件  
+                        m_pfc.AddFontFile(fontPath);
+
+                        // 获取字体族
+                        fontFamily = m_pfc.Families[m_pfc.Families.Length - 1];
+
+                        // 存到缓存
+                        m_fontFamiltDic.Add(fontPath, fontFamily);
+                    }
+                    else
+                    {
+                        fontFamily = m_fontFamiltDic[fontPath];
+                    }
+                }
+
+                callback?.Invoke(fontFamily);
+            });
+
         }
     }
 }

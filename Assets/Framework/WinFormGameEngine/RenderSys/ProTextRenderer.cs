@@ -26,7 +26,6 @@ public class ProTextRenderer : BaseComponent, IRenderer
     {
         PointF pos = new(this.Transform.Position.X, this.Transform.Position.Y);
         g.DrawString(m_text, m_font, RenderConst.SolidBrush, pos);
-
     }
 
     public override void Awake()
