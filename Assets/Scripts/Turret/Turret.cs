@@ -15,7 +15,6 @@ public class Turret : BaseComponent
     private LaunchMissileUIListener m_launchMissileUIListener;
     private TurretReload m_reload;
     private TurretReloadPlayerController m_turretReloadPlayerController;
-    private AudioSource m_audioSource;
     private RandomAudioSource m_randomAudioSource;
     private LerpMove m_lerpMove;
 
@@ -25,7 +24,6 @@ public class Turret : BaseComponent
     public TurretLaunchMissile LaunchMissile { get => m_launchMissile; set => m_launchMissile = value; }
     public TurretReload Reload { get => m_reload; set => m_reload = value; }
     public Missile Missile { get => m_missile; set => m_missile = value; }
-    public AudioSource AudioSource { get => m_audioSource; set => m_audioSource = value; }
     public RandomAudioSource RandomAudioSource { get => m_randomAudioSource; set => m_randomAudioSource = value; }
     public LerpMove LerpMove { get => m_lerpMove; set => m_lerpMove = value; }
 
@@ -91,15 +89,27 @@ public class Turret : BaseComponent
 
         m_reload.Reload();
 
-        //m_audioSource = this.AddComponent<AudioSource>();
+        // RandomAudioSource
+        m_randomAudioSource = this.AddComponent<RandomAudioSource>();
+        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
+        {
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+        });
+        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_1.wav", (soundPlayer) =>
+        {
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+        });
+        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_2.wav", (soundPlayer) =>
+        {
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+        });
+        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_3.wav", (soundPlayer) =>
+        {
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+        });
 
-        //m_randomAudioSource = this.AddComponent<RandomAudioSource>();
-        //m_randomAudioSource.AudioSource = m_audioSource;
-        //m_randomAudioSource.AudioPathList.Add("Assets/Resources/Audio/launch_0.wav");
-        //m_randomAudioSource.AudioPathList.Add("Assets/Resources/Audio/launch_1.wav");
-        //m_randomAudioSource.AudioPathList.Add("Assets/Resources/Audio/launch_2.wav");
-        //m_randomAudioSource.AudioPathList.Add("Assets/Resources/Audio/launch_3.wav");
 
+        // LerpMove
         m_lerpMove = this.AddComponent<LerpMove>();
         m_lerpMove.EndPos = new Vector2(GameSys.Instance.Form.Width / 2, GameSys.Instance.Form.Height);
 

@@ -1,45 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Com.WWZ.WinFormGameEngine
 {
     /// <summary>
-    /// 随机音频播放源组件。需关联AudioSource组件
+    /// 随机音频播放源组件
     /// </summary>
     public class RandomAudioSource : BaseComponent
     {
-        // 基于AudioSource
+        // 基于SoundPlayer
 
-        private List<string> m_audioPathList = new();
-        private AudioSource m_audioSource;
-
-        /// <summary>
-        /// 关联的AudioSource
-        /// </summary>
-        public AudioSource AudioSource { get => m_audioSource; set => m_audioSource = value; }
+        private List<SoundPlayer> m_soundPlayerList = new List<SoundPlayer>();
 
         /// <summary>
-        /// 随机播放列表
+        /// SoundPlayer列表。存储随机播放的几个SoundPlayer
         /// </summary>
-        public List<string> AudioPathList { get => m_audioPathList; }
+        public List<SoundPlayer> SoundPlayerList { get => m_soundPlayerList; }
 
+
+
+        /// <summary>
+        /// (随机)播放
+        /// </summary>
         public void Play()
         {
-            //if (m_audioPathList.Count == 0)
-            //    return;
+            if (m_soundPlayerList.Count == 0)
+                return;
 
-            //// 生成audioPathList的随机下标
-            //m_audioSource.AudioPath = m_audioPathList[Mathf.RandomRangeInt(0, m_audioPathList.Count - 1)];
+            int index = Mathf.RandomRangeInt(0, m_soundPlayerList.Count - 1);
 
-            //m_audioSource.Play();
+            m_soundPlayerList[index].Play();
         }
 
+        /// <summary>
+        /// 停止播放。此时可能正在播放多个SoundPlayer，它们会全部停止
+        /// </summary>
         public void Stop()
         {
-            m_audioSource.Stop();
+            foreach (SoundPlayer each in m_soundPlayerList)
+            {
+                each.Stop();
+            }
+        }
+
+        public override void OnDestroy()
+        {
+            // 每个SoundPlayer都调用Dispose
+            foreach (SoundPlayer each in m_soundPlayerList)
+            {
+                each.Dispose();
+            }
         }
     }
 }

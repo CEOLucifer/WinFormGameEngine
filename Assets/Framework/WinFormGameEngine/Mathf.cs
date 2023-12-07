@@ -133,6 +133,12 @@ namespace Com.WWZ.WinFormGameEngine
             return (float)(min + (max - min) * r.NextDouble());
         }
 
+        /// <summary>
+        /// 随机产生一定范围内的int
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         public static int RandomRangeInt(int min, int max)
         {
             return r.Next(min, max + 1);

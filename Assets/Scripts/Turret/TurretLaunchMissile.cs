@@ -32,7 +32,7 @@ public class TurretLaunchMissile : BaseComponent
         m_turret.Missile.Animator.Play();
 
         // 播放音效
-        //m_turret.RandomAudioSource.Play();
+        m_turret.RandomAudioSource.Play();
 
         // 断绝父子关系
         m_turret.Missile.Transform.Parent = null;

@@ -49,6 +49,18 @@ namespace Com.WWZ.WinFormGameEngine
                 float delta = value - m_rotation;
                 m_rotation = value;
 
+                // 归位矩阵
+                Matrix4x4 mReturn = Mathf.CreateTranslation(new Vector2(-this.m_position.X, -this.m_position.Y));
+
+                // 旋转矩阵
+                Matrix4x4 mRotation = Mathf.CreateRotation(delta);
+
+                // 平移矩阵
+                Matrix4x4 mTranslation = Mathf.CreateTranslation(new Vector2(this.m_position.X, this.m_position.Y));
+
+                // 以上三个矩阵相乘，不需要在下面foreach循环中重复计算
+                Matrix4x4 mrrt = mTranslation * mRotation * mReturn;
+
                 // 修改子Transform的Rotation和Postion
                 foreach (Transform each in m_childrenList)
                 {
@@ -58,17 +70,8 @@ namespace Com.WWZ.WinFormGameEngine
                     // 原坐标矩阵
                     Matrix4x4 mOrigin = Mathf.CreatePointMatrix(each.Position);
 
-                    // 归位矩阵
-                    Matrix4x4 mReturn = Mathf.CreateTranslation(new Vector2(-this.m_position.X, -this.m_position.Y));
-
-                    // 旋转矩阵
-                    Matrix4x4 mRotation = Mathf.CreateRotation(delta);
-
-                    // 平移矩阵
-                    Matrix4x4 mTranslation = Mathf.CreateTranslation(new Vector2(this.m_position.X, this.m_position.Y));
-
                     // 矩阵相乘
-                    Matrix4x4 res = mTranslation * mRotation * mReturn * mOrigin;
+                    Matrix4x4 res = mrrt * mOrigin;
 
                     each.Position = new Vector2(res.M11, res.M21);
                 }

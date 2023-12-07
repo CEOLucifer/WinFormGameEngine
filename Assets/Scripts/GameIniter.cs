@@ -25,12 +25,13 @@ public class GameIniter : BaseComponent
         //audioSource.SoundPlayer = Resources.LoadSoundPlayer("Assets/Resources/Audio/launch_0.wav");
         //audioSource.Play();
 
-        GameObject obj = new GameObject("AudioSource");
-        AudioSource audioSource = obj.AddComponent<AudioSource>();
-        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
-        {
-            audioSource.SoundPlayer = soundPlayer;
-            audioSource.Play();
-        });
+        //GameObject obj = new GameObject("AudioSource");
+        //AudioSource audioSource = obj.AddComponent<AudioSource>();
+        //Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
+        //{
+        //    audioSource.SoundPlayer = soundPlayer;
+        //    audioSource.Play();
+        //});
+
     }
 }

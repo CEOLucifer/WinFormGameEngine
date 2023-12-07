@@ -86,7 +86,7 @@ namespace Com.WWZ.WinFormGameEngine
             {
                 SoundPlayer sd = new SoundPlayer();
                 sd.SoundLocation = audioPath;
-                sd.LoadAsync();
+                sd.Load();
                 callback?.Invoke(sd);
             });
         }
