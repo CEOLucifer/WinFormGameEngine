@@ -30,5 +30,10 @@ namespace Com.WWZ.WinFormGameEngine
         {
             m_soundPlayer?.Stop();
         }
+
+        public override void OnDestroy()
+        {
+            m_soundPlayer?.Dispose();
+        }
     }
 }
