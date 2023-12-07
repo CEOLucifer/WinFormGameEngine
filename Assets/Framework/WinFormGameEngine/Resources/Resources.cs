@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace Com.WWZ.WinFormGameEngine
         private static Dictionary<string, Bitmap> m_bitmapDic = new();
 
         /// <summary>
-        /// 异步加载时的锁对象
+        /// 异步加载Bitmap时的锁对象
         /// </summary>
         private static object m_lock = new();
 
@@ -59,6 +60,34 @@ namespace Com.WWZ.WinFormGameEngine
                 }
 
                 callback?.Invoke(newBitmap);
+            });
+        }
+
+        /// <summary>
+        /// 同步加载一个SoundPlayer
+        /// </summary>
+        /// <returns></returns>
+        public static SoundPlayer LoadSoundPlayer(string audioPath)
+        {
+            SoundPlayer sd = new SoundPlayer();
+            sd.SoundLocation = audioPath;
+            sd.Load();
+            return sd;
+        }
+
+        /// <summary>
+        /// 异步加载一个SoundPlayer
+        /// </summary>
+        /// <param name="audioPath"></param>
+        /// <param name="callback"></param>
+        public static void LoadSoundPlayerAsync(string audioPath, Action<SoundPlayer> callback)
+        {
+            Task.Run(() =>
+            {
+                SoundPlayer sd = new SoundPlayer();
+                sd.SoundLocation = audioPath;
+                sd.LoadAsync();
+                callback?.Invoke(sd);
             });
         }
     }

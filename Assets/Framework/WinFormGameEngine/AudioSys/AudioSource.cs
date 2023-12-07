@@ -14,34 +14,21 @@ namespace Com.WWZ.WinFormGameEngine
     {
         // 基于SoundPlayer
 
-        private SoundPlayer m_soundPlayer = new();
+        private SoundPlayer m_soundPlayer;
 
         /// <summary>
-        /// 音频文件路径
+        /// 使用的SoundPlayer
         /// </summary>
-        public string AudioPath
-        {
-            get => m_soundPlayer.SoundLocation;
-            set
-            {
-                // 原先的应该停止播放
-                m_soundPlayer.Stop();
-
-                m_soundPlayer.SoundLocation = value;
-                m_soundPlayer.Load();
-            }
-        }
-
+        public SoundPlayer SoundPlayer { get => m_soundPlayer; set => m_soundPlayer = value; }
 
         public void Play()
         {
-            m_soundPlayer.Play();
-
+            m_soundPlayer?.Play();
         }
 
         public void Stop()
         {
-            m_soundPlayer.Stop();
+            m_soundPlayer?.Stop();
         }
     }
 }

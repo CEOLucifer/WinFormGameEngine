@@ -17,6 +17,20 @@ public class GameIniter : BaseComponent
         DebuggerSys.Instance.IsShowCurFps = true;
         DebuggerSys.Instance.Enter();
         Time.FPS = 120;
+
         GameManager.Instance.EnterInit();
+
+        //GameObject obj = new GameObject("AudioSource");
+        //AudioSource audioSource = obj.AddComponent<AudioSource>();
+        //audioSource.SoundPlayer = Resources.LoadSoundPlayer("Assets/Resources/Audio/launch_0.wav");
+        //audioSource.Play();
+
+        GameObject obj = new GameObject("AudioSource");
+        AudioSource audioSource = obj.AddComponent<AudioSource>();
+        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
+        {
+            audioSource.SoundPlayer = soundPlayer;
+            audioSource.Play();
+        });
     }
 }

@@ -28,13 +28,13 @@ namespace Com.WWZ.WinFormGameEngine
 
         public void Play()
         {
-            if (m_audioPathList.Count == 0)
-                return;
+            //if (m_audioPathList.Count == 0)
+            //    return;
 
-            // 生成audioPathList的随机下标
-            m_audioSource.AudioPath = m_audioPathList[Mathf.RandomRangeInt(0, m_audioPathList.Count - 1)];
+            //// 生成audioPathList的随机下标
+            //m_audioSource.AudioPath = m_audioPathList[Mathf.RandomRangeInt(0, m_audioPathList.Count - 1)];
 
-            m_audioSource.Play();
+            //m_audioSource.Play();
         }
 
         public void Stop()
