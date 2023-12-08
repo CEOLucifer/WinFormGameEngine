@@ -135,7 +135,7 @@ namespace Com.WWZ.WinFormGameEngine
         {
             if (m_isDestroyed)
             {
-                throw new AlreadyDestroyedException("GameObject has been destroyed but still attempt to destroy it again.");
+                return;
             }
 
             m_isDestroyed = true;

@@ -78,7 +78,7 @@ namespace Com.WWZ.WinFormGameEngine
         {
             if (m_isDestroyed)
             {
-                throw new Exception("Component has been destroyed but still attempt to destroy it.");
+                return;
             }
 
             // 标记删除
