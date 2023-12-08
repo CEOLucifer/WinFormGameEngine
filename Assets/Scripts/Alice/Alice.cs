@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using 炮打飞机;
@@ -73,6 +74,16 @@ public class Alice : BaseComponent
         m_spriteRenderer.Bitmap = Resources.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_seriousSpeak.png");
         m_textPrinter.Clear();
         m_textPrinter.PrintContent("长官，快控制导弹防御系统拦截敌机吧！");
+
+        // LerpMove
+        Turret turret = GameManager.Instance.Turret;
+        turret.LerpMove = turret.AddComponent<LerpMove>();
+        turret.LerpMove.EndPos = new Vector2(GameSys.Instance.Form.Width / 2, GameSys.Instance.Form.Height);
+
+        yield return new WaitForSeconds(5);
+
+        m_spriteRenderer.Bitmap = Resources.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_idle.png");
+        m_textPrinter.Clear();
     }
 
     public override void OnDestroy()
