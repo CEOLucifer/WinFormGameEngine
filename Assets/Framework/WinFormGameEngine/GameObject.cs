@@ -31,18 +31,7 @@ namespace Com.WWZ.WinFormGameEngine
 
         internal List<BaseComponent> ComponentList { get => m_componentList; }
 
-        public Transform Transform
-        {
-            get
-            {
-                // 被销毁的游戏对象，就不允许可以访问其Transform了
-                if (m_isDestroyed)
-                {
-                    throw new AlreadyDestroyedException("GameObject has been destroyed but still attempt to access its transform.");
-                }
-                return m_transform;
-            }
-        }
+        public Transform Transform => m_transform;
 
         /// <summary>
         /// 是否被标记销毁
