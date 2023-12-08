@@ -80,11 +80,6 @@ namespace Com.WWZ.WinFormGameEngine
         /// <typeparam name="T"></typeparam>
         public T AddComponent<T>() where T : BaseComponent, new()
         {
-            if (m_isDestroyed)
-            {
-                throw new AlreadyDestroyedException("GameObject has been destroyed but still attempt to add a component to it.");
-            }
-
             T newComponent = new T();
 
             // 如果是Transform，抛出异常
@@ -106,12 +101,6 @@ namespace Com.WWZ.WinFormGameEngine
         /// <returns></returns>
         public T GetComponent<T>() where T : BaseComponent
         {
-            if (m_isDestroyed)
-            {
-                throw new AlreadyDestroyedException("GameObject has been destroyed but still attempt to get a component from it.");
-            }
-
-
             foreach (var each in m_componentList)
             {
                 if (each is T && !each.IsDestroyed)
