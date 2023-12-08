@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// 表示协程中的间隔时间
+/// 协程返回类型：表示协程中的间隔时间
 /// </summary>
 public class WaitForSeconds
 {

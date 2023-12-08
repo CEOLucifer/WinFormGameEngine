@@ -57,6 +57,14 @@ public class CoroutineComp : BaseComponent
                 MoveNext();
             }
         }
+        else if (cur is ContinueToken)
+        {
+            ContinueToken continueToken = cur as ContinueToken;
+            if (continueToken.IsAllowContinue)
+            {
+                MoveNext();
+            }
+        }
         else
         {
             MoveNext();
