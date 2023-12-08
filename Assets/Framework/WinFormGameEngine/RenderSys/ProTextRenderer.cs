@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using 炮打飞机.Assets.Framework;
 
 /// <summary>
 /// 文本渲染组件
@@ -32,4 +33,11 @@ public class ProTextRenderer : BaseComponent, IRenderer
     {
         (this as IRenderer).RegisterToRenderSys();
     }
+
+    public override void OnDestroy()
+    {
+        // 从渲染队列移除
+        RenderSys.Instance.RendererList.Remove(this);
+    }
+
 }

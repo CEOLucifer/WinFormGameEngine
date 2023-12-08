@@ -21,6 +21,6 @@ public class TurretReloadPlayerController : BaseComponent
         };
 
         BattleUIPanel battleUiPanel = UISys.Instance.GetPanel<BattleUIPanel>();
-        battleUiPanel.C_turretBtnsPanel.Control.reloadBtn.Click += m_onReloadBtnClick;
+        battleUiPanel.C_battleUIControl.Control.reloadBtn.Click += m_onReloadBtnClick;
     }
 }

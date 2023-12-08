@@ -42,19 +42,19 @@ public class MissileRotatePlayerController : BaseComponent
 
         // 订阅UI事件
         BattleUIPanel battleUiPanel = UISys.Instance.GetPanel<BattleUIPanel>();
-        battleUiPanel.C_turretBtnsPanel.Control.leftBtn.MouseDown += m_onLeftBtnMouseDown;
-        battleUiPanel.C_turretBtnsPanel.Control.leftBtn.MouseUp += m_onLeftBtnMouseUp;
-        battleUiPanel.C_turretBtnsPanel.Control.rightBtn.MouseDown += m_onRightBtnMouseDown;
-        battleUiPanel.C_turretBtnsPanel.Control.rightBtn.MouseUp += m_onRightBtnMouseUp;
+        battleUiPanel.C_battleUIControl.Control.leftBtn.MouseDown += m_onLeftBtnMouseDown;
+        battleUiPanel.C_battleUIControl.Control.leftBtn.MouseUp += m_onLeftBtnMouseUp;
+        battleUiPanel.C_battleUIControl.Control.rightBtn.MouseDown += m_onRightBtnMouseDown;
+        battleUiPanel.C_battleUIControl.Control.rightBtn.MouseUp += m_onRightBtnMouseUp;
     }
 
     public override void OnDestroy()
     {
         BattleUIPanel battleUiPanel = UISys.Instance.GetPanel<BattleUIPanel>();
-        battleUiPanel.C_turretBtnsPanel.Control.leftBtn.MouseDown -= m_onLeftBtnMouseDown;
-        battleUiPanel.C_turretBtnsPanel.Control.leftBtn.MouseUp -= m_onLeftBtnMouseUp;
-        battleUiPanel.C_turretBtnsPanel.Control.rightBtn.MouseDown -= m_onRightBtnMouseDown;
-        battleUiPanel.C_turretBtnsPanel.Control.rightBtn.MouseUp -= m_onRightBtnMouseUp;
+        battleUiPanel.C_battleUIControl.Control.leftBtn.MouseDown -= m_onLeftBtnMouseDown;
+        battleUiPanel.C_battleUIControl.Control.leftBtn.MouseUp -= m_onLeftBtnMouseUp;
+        battleUiPanel.C_battleUIControl.Control.rightBtn.MouseDown -= m_onRightBtnMouseDown;
+        battleUiPanel.C_battleUIControl.Control.rightBtn.MouseUp -= m_onRightBtnMouseUp;
     }
 
 }

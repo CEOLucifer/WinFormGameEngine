@@ -29,7 +29,7 @@ public class BattleUIPanelSys : BaseSingleton<BattleUIPanelSys>
     {
         BattleUIPanel panel = UISys.Instance.ShowPanel<BattleUIPanel>();
 
-        panel.C_turretBtnsPanel.Control.exitBtn.Click += (_, _) =>
+        panel.C_battleUIControl.Control.exitBtn.Click += (_, _) =>
         {
             m_onExitBtnClick?.Invoke();
         };
@@ -43,14 +43,14 @@ public class BattleUIPanelSys : BaseSingleton<BattleUIPanelSys>
     public void ShowReloadBtn()
     {
         BattleUIPanel panel = UISys.Instance.GetPanel<BattleUIPanel>();
-        panel.C_turretBtnsPanel.Control.launchBtn.Visible = false;
-        panel.C_turretBtnsPanel.Control.reloadBtn.Visible = true;
+        panel.C_battleUIControl.Control.launchBtn.Visible = false;
+        panel.C_battleUIControl.Control.reloadBtn.Visible = true;
     }
 
     public void ShowLaunchBtn()
     {
         BattleUIPanel panel = UISys.Instance.GetPanel<BattleUIPanel>();
-        panel.C_turretBtnsPanel.Control.launchBtn.Visible = true;
-        panel.C_turretBtnsPanel.Control.reloadBtn.Visible = false;
+        panel.C_battleUIControl.Control.launchBtn.Visible = true;
+        panel.C_battleUIControl.Control.reloadBtn.Visible = false;
     }
 }

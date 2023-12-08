@@ -16,6 +16,7 @@ public class GameManager : BaseSingleton<GameManager>
     private HashSet<Plane> m_planeSet = new HashSet<Plane>();
     private Turret m_turret;
     private Missile m_missile;
+    private Alice m_alice;
 
     public HashSet<Plane> PlaneSet { get => m_planeSet; set => m_planeSet = value; }
     public Turret Turret { get => m_turret; set => m_turret = value; }
@@ -31,6 +32,10 @@ public class GameManager : BaseSingleton<GameManager>
         obj.AddComponent<PlaneGenerater>();
 
         GenerateTurret();
+
+        // 爱丽丝
+        GameObject aliceObj = new GameObject("Alice");
+        m_alice = aliceObj.AddComponent<Alice>();
     }
 
     /// <summary>
@@ -57,7 +62,11 @@ public class GameManager : BaseSingleton<GameManager>
                 m_missile.GameObject.Destroy();
         }
 
-
+        // 清除爱丽丝
+        if (m_alice != null)
+        {
+            m_alice.GameObject.Destroy();
+        }
 
         // 隐藏战斗UI面板
         BattleUIPanelSys.Instance.Hide();

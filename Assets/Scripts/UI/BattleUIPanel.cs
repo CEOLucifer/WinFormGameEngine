@@ -14,9 +14,9 @@ using 炮打飞机.Assets.Form;
 /// </summary>
 public class BattleUIPanel : BaseComponent, IUIPanel
 {
-    private UIControl<BattleUIControl> m_c_turretBtnsPanel;
+    private UIControl<BattleUIControl> m_c_battleUIControl;
 
-    public UIControl<BattleUIControl> C_turretBtnsPanel { get => m_c_turretBtnsPanel; set => m_c_turretBtnsPanel = value; }
+    public UIControl<BattleUIControl> C_battleUIControl { get => m_c_battleUIControl; set => m_c_battleUIControl = value; }
 
     public void PanelHide()
     {
@@ -26,12 +26,12 @@ public class BattleUIPanel : BaseComponent, IUIPanel
     public void PanelShow()
     {
         GameObject obj = new GameObject(typeof(BattleUIControl).Name);
-        m_c_turretBtnsPanel = obj.AddComponent<UIControl<BattleUIControl>>();
+        m_c_battleUIControl = obj.AddComponent<UIControl<BattleUIControl>>();
 
         // 作为子物体
         obj.Transform.Parent = this.Transform;
 
-        BattleUIControl control = m_c_turretBtnsPanel.Control;
+        BattleUIControl control = m_c_battleUIControl.Control;
 
         control.Dock = DockStyle.Fill;
     }

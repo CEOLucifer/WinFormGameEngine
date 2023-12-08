@@ -14,6 +14,11 @@
     <None Remove="Assets\Resources\Audio\launch_2.wav" />
     <None Remove="Assets\Resources\Audio\launch_3.wav" />
     <None Remove="Assets\Resources\Font\IPix中文像素字体.ttf" />
+    <None Remove="Assets\Resources\Sprites\Alice\Alice_happy.png" />
+    <None Remove="Assets\Resources\Sprites\Alice\Alice_idle.png" />
+    <None Remove="Assets\Resources\Sprites\Alice\Alice_sad.png" />
+    <None Remove="Assets\Resources\Sprites\Alice\Alice_seriousSpeak.png" />
+    <None Remove="Assets\Resources\Sprites\Alice\Alice_speak.png" />
     <None Remove="Assets\Resources\Sprites\background.png" />
     <None Remove="Assets\Resources\Sprites\base.png" />
     <None Remove="Assets\Resources\Sprites\missile.png" />
@@ -39,6 +44,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\Resources\Font\IPix中文像素字体.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\Alice\Alice_happy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\Alice\Alice_idle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\Alice\Alice_sad.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\Alice\Alice_seriousSpeak.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\Sprites\Alice\Alice_speak.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\Resources\Sprites\background.png">

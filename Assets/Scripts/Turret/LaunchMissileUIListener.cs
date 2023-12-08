@@ -27,7 +27,7 @@ public class LaunchMissileUIListener : BaseComponent
         };
 
         BattleUIPanel battleUiPanel = UISys.Instance.GetPanel<BattleUIPanel>();
-        battleUiPanel.C_turretBtnsPanel.Control.launchBtn.Click += m_onLaunchBtnClick;
+        battleUiPanel.C_battleUIControl.Control.launchBtn.Click += m_onLaunchBtnClick;
     }
 }
 
