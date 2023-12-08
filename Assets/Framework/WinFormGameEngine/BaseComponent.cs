@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Com.WWZ.WinFormGameEngine
 {
     /// <summary>
-    /// 游戏对象组件基类
+    /// 游戏对象组件基类。请不要new任何一个它的基类对象！
     /// </summary>
     public abstract class BaseComponent
     {
