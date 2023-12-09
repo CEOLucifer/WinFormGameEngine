@@ -24,6 +24,8 @@ public class Alice : BaseComponent
     private ProTextRenderer m_proTextRenderer;
     private TextPrinter m_textPrinter;
 
+    private Action m_onAllPlaneDestroyed;
+
     public ContinueToken ContinueToken { get => m_continueToken; set => m_continueToken = value; }
 
     public override void Awake()
@@ -46,10 +48,11 @@ public class Alice : BaseComponent
         m_textPrinter.ProTextRenderer = m_proTextRenderer;
 
         // 监听所有飞机销毁事件
-        GameManager.Instance.OnAllPlaneDestroyed += () =>
+        m_onAllPlaneDestroyed += () =>
         {
             m_coroutineComp.StartCoroutine(VictoryCoroutine());
         };
+        GameManager.Instance.OnAllPlaneDestroyed += m_onAllPlaneDestroyed;
     }
 
     /// <summary>
@@ -117,5 +120,7 @@ public class Alice : BaseComponent
     public override void OnDestroy()
     {
         m_speakObj.Destroy();
+
+        GameManager.Instance.OnAllPlaneDestroyed -= m_onAllPlaneDestroyed;
     }
 }
