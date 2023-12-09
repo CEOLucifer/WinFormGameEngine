@@ -32,7 +32,7 @@ public class Alice : BaseComponent
 
         m_spriteRenderer = this.AddComponent<SpriteRenderer>();
         m_spriteRenderer.Pivot = new(288, 500);
-        m_spriteRenderer.Bitmap = ResSys.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_idle.png");
+        m_spriteRenderer.Bitmap = ResSys.Load<BitmapPackage>("Assets/Resources/Sprites/Alice/Alice_idle.png").Bitmap;
 
         m_coroutineComp = this.AddComponent<CoroutineComp>();
         m_coroutineComp.StartCoroutine(GuideCoroutine());
@@ -41,7 +41,7 @@ public class Alice : BaseComponent
         m_speakObj = new GameObject("FontObj");
         m_speakObj.Transform.Position = new(400, GameSys.Instance.Form.Height - 500);
         m_proTextRenderer = m_speakObj.AddComponent<ProTextRenderer>();
-        m_proTextRenderer.Font = new Font(ResSys.LoadFontFamily("Assets/Resources/Font/IPix中文像素字体.ttf"), 15, FontStyle.Bold);
+        m_proTextRenderer.Font = new Font(ResSys.Load<FontFamilyPackage>("Assets/Resources/Font/IPix中文像素字体.ttf").FontFamily, 15, FontStyle.Bold);
         m_textPrinter = m_speakObj.AddComponent<TextPrinter>();
         m_textPrinter.ProTextRenderer = m_proTextRenderer;
 
@@ -66,7 +66,7 @@ public class Alice : BaseComponent
         yield return new WaitForSeconds(1.5f);
 
         // 讲话
-        m_spriteRenderer.Bitmap = ResSys.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_speak.png");
+        m_spriteRenderer.Bitmap = ResSys.Load<BitmapPackage>("Assets/Resources/Sprites/Alice/Alice_speak.png").Bitmap;
         m_textPrinter.PrintContent("警告！爱丽丝检测到有大量敌机来袭。");
 
         // 显示UI
@@ -84,7 +84,7 @@ public class Alice : BaseComponent
         yield return m_continueToken;
 
         // 讲话
-        m_spriteRenderer.Bitmap = ResSys.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_seriousSpeak.png");
+        m_spriteRenderer.Bitmap = ResSys.Load<BitmapPackage>("Assets/Resources/Sprites/Alice/Alice_seriousSpeak.png").Bitmap;
         m_textPrinter.Clear();
         m_textPrinter.PrintContent("长官，快控制导弹防御系统拦截敌机吧！");
 
@@ -93,7 +93,7 @@ public class Alice : BaseComponent
 
         yield return new WaitForSeconds(5);
 
-        m_spriteRenderer.Bitmap = ResSys.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_idle.png");
+        m_spriteRenderer.Bitmap = ResSys.Load<BitmapPackage>("Assets/Resources/Sprites/Alice/Alice_idle.png").Bitmap;
         m_textPrinter.Clear();
     }
 
@@ -103,7 +103,7 @@ public class Alice : BaseComponent
     /// <returns></returns>
     private IEnumerator VictoryCoroutine()
     {
-        m_spriteRenderer.Bitmap = ResSys.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_happy.png");
+        m_spriteRenderer.Bitmap = ResSys.Load<BitmapPackage>("Assets/Resources/Sprites/Alice/Alice_happy.png").Bitmap;
 
         m_textPrinter.Clear();
         m_textPrinter.PrintContent("邦邦咔邦！");

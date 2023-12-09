@@ -36,9 +36,9 @@ public class Missile : BaseComponent
     {
         m_sp = this.GameObject.AddComponent<SpriteRenderer>();
         // 异步加载图片
-        ResSys.LoadBitmapAsync("Assets/Resources/Sprites/missile.png", (bitmap) =>
+        ResSys.LoadAsync<BitmapPackage>("Assets/Resources/Sprites/missile.png", (bitmapPackage) =>
         {
-            m_sp.Bitmap = bitmap;
+            m_sp.Bitmap = bitmapPackage.Bitmap;
         });
         m_sp.Pivot = new(145, 129);
         m_sp.SortingOrder = 2;
@@ -72,12 +72,12 @@ public class Missile : BaseComponent
             m_animator = this.AddComponent<Animator>();
             m_animator.SpriteRenderer = m_sp;
             m_animator.Interval = 0.05f;
-            ResSys.LoadBitmapAsync("Assets/Resources/Sprites/missile_1.png", (bitmap1) =>
+            ResSys.LoadAsync<BitmapPackage>("Assets/Resources/Sprites/missile_1.png", (bitmapPackage1) =>
             {
-                ResSys.LoadBitmapAsync("Assets/Resources/Sprites/missile_2.png", (bitmap2) =>
+                ResSys.LoadAsync<BitmapPackage>("Assets/Resources/Sprites/missile_2.png", (bitmapPackage2) =>
                 {
-                    m_animator.BitMapList.Add(bitmap1);
-                    m_animator.BitMapList.Add(bitmap2);
+                    m_animator.BitMapList.Add(bitmapPackage1.Bitmap);
+                    m_animator.BitMapList.Add(bitmapPackage2.Bitmap);
                 });
             });
         }

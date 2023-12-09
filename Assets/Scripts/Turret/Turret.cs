@@ -33,9 +33,9 @@ public class Turret : BaseComponent
             m_baseObj = new GameObject("Base");
             SpriteRenderer sp = m_baseObj.AddComponent<SpriteRenderer>();
             // 异步加载图片
-            ResSys.LoadBitmapAsync("Assets/Resources/Sprites/base.png", (bitmap) =>
+            ResSys.LoadAsync<BitmapPackage>("Assets/Resources/Sprites/base.png", (bitmapPackage) =>
             {
-                sp.Bitmap = bitmap;
+                sp.Bitmap = bitmapPackage.Bitmap;
             });
             sp.Pivot = new(130, 260);
 
@@ -47,9 +47,9 @@ public class Turret : BaseComponent
             m_rotaterObj = new GameObject("Rotater");
             SpriteRenderer sp = m_rotaterObj.AddComponent<SpriteRenderer>();
             // 异步加载图片
-            ResSys.LoadBitmapAsync("Assets/Resources/Sprites/rotater.png", (bitmap) =>
+            ResSys.LoadAsync<BitmapPackage>("Assets/Resources/Sprites/rotater.png", (bitmapPackage) =>
             {
-                sp.Bitmap = bitmap;
+                sp.Bitmap = bitmapPackage.Bitmap;
             });
             sp.Pivot = new(136, 129);
             m_rotaterObj.Transform.Position = this.Transform.Position + new Vector2(0, -128);
@@ -91,21 +91,21 @@ public class Turret : BaseComponent
 
         // RandomAudioSource
         m_randomAudioSource = this.AddComponent<RandomAudioSource>();
-        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
+        ResSys.LoadAsync<SoundPlayerPackage>("Assets/Resources/Audio/launch_0.wav", (soundPlayerPackage) =>
         {
-            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayerPackage.SoundPlayer);
         });
-        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_1.wav", (soundPlayer) =>
+        ResSys.LoadAsync<SoundPlayerPackage>("Assets/Resources/Audio/launch_1.wav", (soundPlayerPackage) =>
         {
-            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayerPackage.SoundPlayer);
         });
-        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_2.wav", (soundPlayer) =>
+        ResSys.LoadAsync<SoundPlayerPackage>("Assets/Resources/Audio/launch_2.wav", (soundPlayerPackage) =>
         {
-            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayerPackage.SoundPlayer);
         });
-        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_3.wav", (soundPlayer) =>
+        ResSys.LoadAsync<SoundPlayerPackage>("Assets/Resources/Audio/launch_3.wav", (soundPlayerPackage) =>
         {
-            m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
+            m_randomAudioSource.SoundPlayerList.Add(soundPlayerPackage.SoundPlayer);
         });
 
         // LerpMove

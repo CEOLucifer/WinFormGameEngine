@@ -88,7 +88,7 @@ namespace Com.WWZ.WinFormGameEngine
             Time.OldTime = DateTime.Now;
 
             // 触发一下单例模式类的构造函数
-            string str = $"{RenderSys.Instance}{CollisionSys.Instance}";
+            string str = $"{RenderSys.Instance}{CollisionSys.Instance}{PublicComponentSys.Instance}";
 
             OnEnter?.Invoke();
         }

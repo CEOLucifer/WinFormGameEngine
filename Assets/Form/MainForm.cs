@@ -26,7 +26,7 @@ namespace 炮打飞机
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
 
-            this.Font = new Font(ResSys.LoadFontFamily("Assets/Resources/Font/IPix中文像素字体.ttf"), 20, FontStyle.Bold);
+            this.Font = new Font(ResSys.Load<FontFamilyPackage>("Assets/Resources/Font/IPix中文像素字体.ttf").FontFamily, 20, FontStyle.Bold);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

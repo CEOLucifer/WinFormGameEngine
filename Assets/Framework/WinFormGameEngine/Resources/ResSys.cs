@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Text;
+using System.IO;
 using System.Media;
 
 namespace Com.WWZ.WinFormGameEngine
@@ -9,142 +10,98 @@ namespace Com.WWZ.WinFormGameEngine
     public class ResSys
     {
         /// <summary>
-        /// Bitmap缓存
+        /// 资源缓存
         /// </summary>
-        private static Dictionary<string, Bitmap> m_bitmapDic = new();
-
-        private static PrivateFontCollection m_pfc = new PrivateFontCollection();
+        private static Dictionary<string, IResourcePackage> m_resDic = new Dictionary<string, IResourcePackage>();
 
         /// <summary>
-        /// 字体族缓存
+        /// 同步加载资源包装
         /// </summary>
-        private static Dictionary<string, FontFamily> m_fontFamiltDic = new();
-
-        /// <summary>
-        /// 同步加载图片资源
-        /// </summary>
-        public static Bitmap LoadBitmap(string path)
-        {
-            if (m_bitmapDic.ContainsKey(path))
-                return m_bitmapDic[path];
-
-            Bitmap bitmap = new(path);
-            m_bitmapDic.Add(path, bitmap);
-
-            return bitmap;
-        }
-
-        /// <summary>
-        /// 异步加载图片资源
-        /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="path"></param>
-        /// <param name="callback"></param>
-        public static void LoadBitmapAsync(string path, Action<Bitmap> callback)
-        {
-            Task.Run(() =>
-               {
-                   Bitmap bitmap = null;
-
-                   lock (m_bitmapDic)
-                   {
-                       if (!m_bitmapDic.ContainsKey(path))
-                       {
-                           bitmap = new(path);
-                           m_bitmapDic.Add(path, bitmap);
-                       }
-                       else
-                       {
-                           bitmap = m_bitmapDic[path];
-                       }
-                   }
-
-                   callback?.Invoke(bitmap);
-               });
-
-        }
-
-        /// <summary>
-        /// 同步加载一个SoundPlayer
-        /// </summary>
         /// <returns></returns>
-        public static SoundPlayer LoadSoundPlayer(string audioPath)
+        public static T Load<T>(string path) where T : class, IResourcePackage, new()
         {
-            SoundPlayer sd = new SoundPlayer();
-            sd.SoundLocation = audioPath;
-            sd.Load();
-            return sd;
-        }
-
-        /// <summary>
-        /// 异步加载一个SoundPlayer
-        /// </summary>
-        /// <param name="audioPath"></param>
-        /// <param name="callback"></param>
-        public static void LoadSoundPlayerAsync(string audioPath, Action<SoundPlayer> callback)
-        {
-            Task.Run(() =>
+            if (m_resDic.ContainsKey(path))
             {
-                SoundPlayer sd = new SoundPlayer();
-                sd.SoundLocation = audioPath;
-                sd.Load();
-                callback?.Invoke(sd);
-            });
+                return m_resDic[path] as T;
+            }
+
+            T t = new T();
+
+            t.Load(path);
+
+            // 加入到缓存
+            m_resDic.Add(path, t);
+
+            return t;
         }
 
         /// <summary>
-        /// 同步加载字体族
+        /// 异步加载资源包装
         /// </summary>
-        /// <param name="fontPath"></param>
-        public static FontFamily LoadFontFamily(string fontPath)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <param name=""></param>
+        public static void LoadAsync<T>(string path, Action<T> callback) where T : class, IResourcePackage, new()
         {
-            if (m_fontFamiltDic.ContainsKey(fontPath))
-                return m_fontFamiltDic[fontPath];
-
-            // 从外部文件加载字体文件  
-            m_pfc.AddFontFile(fontPath);
-
-            // 获取字体族
-            FontFamily newFontFamily = m_pfc.Families[m_pfc.Families.Length - 1];
-
-            // 存到缓存
-            m_fontFamiltDic.Add(fontPath, newFontFamily);
-
-            return newFontFamily;
-        }
-
-        /// <summary>
-        /// 异步加载字体族
-        /// </summary>
-        /// <param name="fontPath"></param>
-        /// <param name="callback"></param>
-        public static void LoadFontFamilyAsync(string fontPath, Action<FontFamily> callback)
-        {
-            Task.Run(() =>
+            // 如果有缓存
+            if (m_resDic.ContainsKey(path))
             {
-                FontFamily fontFamily = null;
+                T res = m_resDic[path] as T;
 
-                lock (m_fontFamiltDic)
+                // 如果还未加载完毕
+                if (!res.IsLoadCompleted)
                 {
-                    if (!m_fontFamiltDic.ContainsKey(fontPath))
+                    // 监视
+                    Monitor(res, () =>
                     {
-                        // 从外部文件加载字体文件  
-                        m_pfc.AddFontFile(fontPath);
+                        callback?.Invoke(res);
+                    });
 
-                        // 获取字体族
-                        fontFamily = m_pfc.Families[m_pfc.Families.Length - 1];
-
-                        // 存到缓存
-                        m_fontFamiltDic.Add(fontPath, fontFamily);
-                    }
-                    else
-                    {
-                        fontFamily = m_fontFamiltDic[fontPath];
-                    }
+                    return;
                 }
 
-                callback?.Invoke(fontFamily);
-            });
+                // 若加载完毕，执行回调
+                callback?.Invoke(m_resDic[path] as T);
+                return;
+            }
 
+            T t = new T();
+
+            // 加入缓存。此时该资源还未加载完毕
+            m_resDic.Add(path, t);
+
+            t.LoadAsync(path);
+
+            Monitor(t, () =>
+            {
+                callback?.Invoke(t);
+            });
+        }
+
+        /// <summary>
+        /// 监视异步加载资源
+        /// </summary>
+        /// <param name="resourcePackage"></param>
+        /// <param name="callBack"></param>
+        private static void Monitor(IResourcePackage resourcePackage, Action callback)
+        {
+            // 创建一个监视委托
+            Action loadCallback = null;
+            loadCallback = () =>
+            {
+                // 加载完毕
+                if (resourcePackage.IsLoadCompleted)
+                {
+                    // 执行回调
+                    callback?.Invoke();
+
+                    PublicComponentSys.Instance.RemoveFuncUpdating(loadCallback);
+                }
+            };
+
+            PublicComponentSys.Instance.AddFuncToUpdate(loadCallback);
         }
     }
 }

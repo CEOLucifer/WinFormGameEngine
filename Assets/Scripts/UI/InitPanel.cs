@@ -54,7 +54,7 @@ public class InitPanel : BaseComponent, IUIPanel
         GameObject titleLabObj = new GameObject("TitleLabObj");
         m_titleLab = titleLabObj.AddComponent<UIControl<Label>>();
         m_titleLab.Control.Text = "炮打飞机";
-        m_titleLab.Control.Font = new Font(ResSys.LoadFontFamily("Assets/Resources/Font/IPix中文像素字体.ttf"), 72);
+        m_titleLab.Control.Font = new Font(ResSys.Load<FontFamilyPackage>("Assets/Resources/Font/IPix中文像素字体.ttf").FontFamily, 72);
         m_titleLab.Control.AutoSize = true;
         m_titleLab.Control.BackColor = Color.Transparent;
         titleLabObj.Transform.Position = new((form.Width - m_titleLab.Control.Width) / 2, m_titleLabEndPosY2);
