@@ -18,7 +18,7 @@ public class MissileHitPlane : BaseComponent
     {
         m_missile.ColliderObj.GetComponent<CircleCollider>().OnCollisionEnter += (collision) =>
         {
-            Console.WriteLine("命中敌机");
+            //Console.WriteLine("命中敌机");
             CircleCollider cc = collision.AnotherCollider as CircleCollider;
             Plane plane = cc.GetComponent<Plane>();
 

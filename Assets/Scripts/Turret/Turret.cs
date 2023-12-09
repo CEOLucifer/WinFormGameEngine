@@ -108,6 +108,11 @@ public class Turret : BaseComponent
             m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
         });
 
+        // LerpMove
+        m_lerpMove = this.AddComponent<LerpMove>();
+        m_lerpMove.EndPos = new Vector2(GameSys.Instance.Form.Width / 2, GameSys.Instance.Form.Height);
+
+
         // 设置初始位置
         this.Transform.Position = new(GameSys.Instance.Form.Width / 2, GameSys.Instance.Form.Height + 400);
     }

@@ -1,18 +1,16 @@
 ﻿using Com.WWZ.WinFormGameEngine;
-using Com.WWZ.WinFormGameEngine.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using 炮打飞机;
 
 /// <summary>
 /// 游戏管理器
 /// </summary>
 public class GameManager : BaseSingleton<GameManager>
 {
+    /// <summary>
+    /// 当所有飞机杯销毁时触发
+    /// </summary>
+    public event Action OnAllPlaneDestroyed;
+
     private HashSet<Plane> m_planeSet = new HashSet<Plane>();
     private Turret m_turret;
     private Missile m_missile;
@@ -24,14 +22,9 @@ public class GameManager : BaseSingleton<GameManager>
 
     public void EnterBattle()
     {
-        // UI
-        BattleUIPanelSys.Instance.Show();
-
         // 敌机生成器
         GameObject obj = new GameObject("PlaneGenerater");
         obj.AddComponent<PlaneGenerater>();
-
-        GenerateTurret();
 
         // 爱丽丝
         GameObject aliceObj = new GameObject("Alice");
@@ -95,5 +88,17 @@ public class GameManager : BaseSingleton<GameManager>
     {
         GameObject turretObj = new GameObject("Turret");
         m_turret = turretObj.AddComponent<Turret>();
+    }
+
+    public void DestroyPlane(Plane plane)
+    {
+        plane.GameObject.Destroy();
+
+        m_planeSet.Remove(plane);
+
+        if (m_planeSet.Count == 0)
+        {
+            OnAllPlaneDestroyed?.Invoke();
+        }
     }
 }

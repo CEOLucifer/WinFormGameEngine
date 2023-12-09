@@ -41,11 +41,21 @@ public class Alice : BaseComponent
         m_speakObj = new GameObject("FontObj");
         m_speakObj.Transform.Position = new(400, GameSys.Instance.Form.Height - 500);
         m_proTextRenderer = m_speakObj.AddComponent<ProTextRenderer>();
-        m_proTextRenderer.Font = new Font(Resources.LoadFontFamily("Assets/Resources/Font/IPix中文像素字体.ttf"), 15);
+        m_proTextRenderer.Font = new Font(Resources.LoadFontFamily("Assets/Resources/Font/IPix中文像素字体.ttf"), 15, FontStyle.Bold);
         m_textPrinter = m_speakObj.AddComponent<TextPrinter>();
         m_textPrinter.ProTextRenderer = m_proTextRenderer;
+
+        // 监听所有飞机销毁事件
+        GameManager.Instance.OnAllPlaneDestroyed += () =>
+        {
+            m_coroutineComp.StartCoroutine(VictoryCoroutine());
+        };
     }
 
+    /// <summary>
+    /// 引导动画
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator GuideCoroutine()
     {
         // 出现动画
@@ -59,8 +69,11 @@ public class Alice : BaseComponent
         m_spriteRenderer.Bitmap = Resources.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_speak.png");
         m_textPrinter.PrintContent("警告！爱丽丝检测到有大量敌机来袭。");
 
+        // 显示UI
+        BattleUIPanelSys.Instance.Show();
+
         // 监听点击界面事件
-        // 由于窗口被挡住了，故监听面板的事件
+        // 由于窗口被面板挡住了，故监听面板的事件
         BattleUIPanel panel = UISys.Instance.GetPanel<BattleUIPanel>();
         panel.C_battleUIControl.Control.Click += (_, _) =>
         {
@@ -70,20 +83,35 @@ public class Alice : BaseComponent
         // 点击之后
         yield return m_continueToken;
 
-        // 讲话，出现炮塔和按钮
+        // 讲话
         m_spriteRenderer.Bitmap = Resources.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_seriousSpeak.png");
         m_textPrinter.Clear();
         m_textPrinter.PrintContent("长官，快控制导弹防御系统拦截敌机吧！");
 
-        // LerpMove
-        Turret turret = GameManager.Instance.Turret;
-        turret.LerpMove = turret.AddComponent<LerpMove>();
-        turret.LerpMove.EndPos = new Vector2(GameSys.Instance.Form.Width / 2, GameSys.Instance.Form.Height);
+        // 生成炮塔
+        GameManager.Instance.GenerateTurret();
 
         yield return new WaitForSeconds(5);
 
         m_spriteRenderer.Bitmap = Resources.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_idle.png");
         m_textPrinter.Clear();
+    }
+
+    /// <summary>
+    /// 胜利动画
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator VictoryCoroutine()
+    {
+        m_spriteRenderer.Bitmap = Resources.LoadBitmap("Assets/Resources/Sprites/Alice/Alice_happy.png");
+
+        m_textPrinter.Clear();
+        m_textPrinter.PrintContent("邦邦咔邦！");
+
+        yield return new WaitForSeconds(2.0f);
+
+        m_textPrinter.Clear();
+        m_textPrinter.PrintContent("长官，我们把敌机都拿下了！");
     }
 
     public override void OnDestroy()

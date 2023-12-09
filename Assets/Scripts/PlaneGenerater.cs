@@ -14,7 +14,7 @@ public class PlaneGenerater : BaseComponent
     /// <summary>
     /// 生成的数量
     /// </summary>
-    private int m_amount = 10;
+    private int m_amount = 5;
 
 
 
