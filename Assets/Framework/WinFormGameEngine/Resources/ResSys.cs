@@ -6,7 +6,7 @@ namespace Com.WWZ.WinFormGameEngine
     /// <summary>
     /// 资源管理模块
     /// </summary>
-    public class Resources
+    public class ResSys
     {
         /// <summary>
         /// Bitmap缓存
@@ -42,24 +42,25 @@ namespace Com.WWZ.WinFormGameEngine
         public static void LoadBitmapAsync(string path, Action<Bitmap> callback)
         {
             Task.Run(() =>
-            {
-                Bitmap bitmap = null;
+               {
+                   Bitmap bitmap = null;
 
-                lock (m_bitmapDic)
-                {
-                    if (!m_bitmapDic.ContainsKey(path))
-                    {
-                        bitmap = new(path);
-                        m_bitmapDic.Add(path, bitmap);
-                    }
-                    else
-                    {
-                        bitmap = m_bitmapDic[path];
-                    }
-                }
+                   lock (m_bitmapDic)
+                   {
+                       if (!m_bitmapDic.ContainsKey(path))
+                       {
+                           bitmap = new(path);
+                           m_bitmapDic.Add(path, bitmap);
+                       }
+                       else
+                       {
+                           bitmap = m_bitmapDic[path];
+                       }
+                   }
 
-                callback?.Invoke(bitmap);
-            });
+                   callback?.Invoke(bitmap);
+               });
+
         }
 
         /// <summary>

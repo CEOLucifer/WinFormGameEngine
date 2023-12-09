@@ -23,7 +23,7 @@ public class Plane : BaseComponent
         m_spriteRenderer = this.GameObject.AddComponent<SpriteRenderer>();
 
         // 异步加载图片
-        Resources.LoadBitmapAsync("Assets/Resources/Sprites/plane.png", (bitmap) =>
+        ResSys.LoadBitmapAsync("Assets/Resources/Sprites/plane.png", (bitmap) =>
         {
             m_spriteRenderer.Bitmap = bitmap;
             m_spriteRenderer.Pivot = new Vector2(134, 132);

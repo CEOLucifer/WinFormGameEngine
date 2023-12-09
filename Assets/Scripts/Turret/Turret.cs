@@ -33,7 +33,7 @@ public class Turret : BaseComponent
             m_baseObj = new GameObject("Base");
             SpriteRenderer sp = m_baseObj.AddComponent<SpriteRenderer>();
             // 异步加载图片
-            Resources.LoadBitmapAsync("Assets/Resources/Sprites/base.png", (bitmap) =>
+            ResSys.LoadBitmapAsync("Assets/Resources/Sprites/base.png", (bitmap) =>
             {
                 sp.Bitmap = bitmap;
             });
@@ -47,7 +47,7 @@ public class Turret : BaseComponent
             m_rotaterObj = new GameObject("Rotater");
             SpriteRenderer sp = m_rotaterObj.AddComponent<SpriteRenderer>();
             // 异步加载图片
-            Resources.LoadBitmapAsync("Assets/Resources/Sprites/rotater.png", (bitmap) =>
+            ResSys.LoadBitmapAsync("Assets/Resources/Sprites/rotater.png", (bitmap) =>
             {
                 sp.Bitmap = bitmap;
             });
@@ -91,19 +91,19 @@ public class Turret : BaseComponent
 
         // RandomAudioSource
         m_randomAudioSource = this.AddComponent<RandomAudioSource>();
-        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
+        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_0.wav", (soundPlayer) =>
         {
             m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
         });
-        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_1.wav", (soundPlayer) =>
+        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_1.wav", (soundPlayer) =>
         {
             m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
         });
-        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_2.wav", (soundPlayer) =>
+        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_2.wav", (soundPlayer) =>
         {
             m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
         });
-        Resources.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_3.wav", (soundPlayer) =>
+        ResSys.LoadSoundPlayerAsync("Assets/Resources/Audio/launch_3.wav", (soundPlayer) =>
         {
             m_randomAudioSource.SoundPlayerList.Add(soundPlayer);
         });
