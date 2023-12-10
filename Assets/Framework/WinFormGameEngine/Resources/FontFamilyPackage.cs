@@ -25,11 +25,14 @@ public class FontFamilyPackage : IResourcePackage
 
     void IResourcePackage.Load(string path)
     {
-        // 从外部文件加载字体文件  
-        s_pfc.AddFontFile(path);
+        lock (s_pfc)
+        {
+            // 从外部文件加载字体文件  
+            s_pfc.AddFontFile(path);
 
-        // 获取字体族
-        m_fontFamily = s_pfc.Families[s_pfc.Families.Length - 1];
+            // 获取字体族
+            m_fontFamily = s_pfc.Families[s_pfc.Families.Length - 1];
+        }
 
         m_isLoadCompleted = true;
     }
@@ -38,13 +41,7 @@ public class FontFamilyPackage : IResourcePackage
     {
         Task.Run(() =>
         {
-            // 从外部文件加载字体文件  
-            s_pfc.AddFontFile(path);
-
-            // 获取字体族
-            m_fontFamily = s_pfc.Families[s_pfc.Families.Length - 1];
-
-            m_isLoadCompleted = true;
+            (this as IResourcePackage).Load(path);
         });
     }
 }

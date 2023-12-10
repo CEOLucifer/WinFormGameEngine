@@ -29,8 +29,7 @@ public class BitmapPackage : IResourcePackage
     {
         Task.Run(() =>
            {
-               m_bitmap = new Bitmap(path);
-               m_isLoadCompleted = true;
+               (this as IResourcePackage).Load(path);
            });
     }
 }

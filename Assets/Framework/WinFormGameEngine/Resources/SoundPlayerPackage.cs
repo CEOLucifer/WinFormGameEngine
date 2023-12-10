@@ -33,11 +33,7 @@ public class SoundPlayerPackage : IResourcePackage
     {
         Task.Run(() =>
         {
-            m_soundPlayer = new SoundPlayer();
-            m_soundPlayer.SoundLocation = path;
-            m_soundPlayer.Load();
-
-            m_isLoadCompleted = true;
+            (this as IResourcePackage).Load(path);
         });
     }
 }
