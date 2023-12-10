@@ -50,20 +50,12 @@ namespace Com.WWZ.WinFormGameEngine
             {
                 T res = m_resDic[path] as T;
 
-                // 如果还未加载完毕
-                if (!res.IsLoadCompleted)
+                // 监视
+                Monitor(res, () =>
                 {
-                    // 监视
-                    Monitor(res, () =>
-                    {
-                        callback?.Invoke(res);
-                    });
+                    callback?.Invoke(res);
+                });
 
-                    return;
-                }
-
-                // 若加载完毕，执行回调
-                callback?.Invoke(m_resDic[path] as T);
                 return;
             }
 
